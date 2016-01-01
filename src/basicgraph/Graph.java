@@ -3,6 +3,7 @@ package basicgraph;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -122,7 +123,37 @@ public abstract class Graph {
 	 */
 	public List<Integer> degreeSequence() {
 		// XXX: Implement in part 1 of week 1
-		return null;
+		// The map is sorted according to the natural ordering of its keys
+		//The keys for the map is the sum of in-neighbors and out-neighbors, 
+		TreeMap<Integer, List<Integer>> result = new TreeMap<Integer,List<Integer>>();
+	
+		for (int i = 0; i < getNumVertices(); i++) {
+			// find in-neighbors
+			List<Integer> in = this.getInNeighbors(i); // get in-neighbors
+			List<Integer> out = this.getNeighbors(i); //get out-neighbors
+			Integer key= in.size()+out.size(); // degree sequence for the single vertices
+			if(result.containsKey(key)){ //If the key exists, if there are more than one vertices with the same degree sequence
+				List<Integer> elements = result.get(key); //get the existing vertices
+				elements.add(i); //add the new vertice to the existing ones
+				//replace the elements
+				result.put(key,elements); 
+			}else{
+				List<Integer> newArrayList = new ArrayList<Integer>();
+				newArrayList.add(i);
+				result.put(key, newArrayList);
+			}
+			
+		}
+		
+		List<Integer> list =new ArrayList<Integer>();
+		for (Integer key : result.keySet()) { 
+			for(int i=0;i<result.get(key).size();i++){ //print the repetitions
+				list.add(key);
+			}
+		}
+		
+		 Collections.reverse(list);  //order list from largest to smallest
+		return list;
 	}
 	
 	/**
@@ -241,6 +272,9 @@ public abstract class Graph {
 		System.out.println("Roads / intersections:");
 		GraphAdjList graphFromFile = new GraphAdjList();
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", graphFromFile);
+		System.out.println("Part I: Answer starts here ................");
+		System.out.println(graphFromFile.degreeSequence());
+		System.out.println("Part I: Answer ends here ................");
 		System.out.println(graphFromFile);
 		
 		System.out.println("Observe all degrees are <= 12.");
@@ -261,7 +295,16 @@ public abstract class Graph {
 		// Test your distance2 code here.
 		System.out.println("Testing distance-two methods on sample graphs...");
 		System.out.println("Goal: implement method using two approaches.");
-
+		
+		System.out.println("Flight data using AdjuMatrix:");
+		GraphAdjMatrix airportGraphMatrix = new GraphAdjMatrix();
+		GraphLoader.loadRoutes("data/airports/routesUA.dat", airportGraphMatrix);
+		System.out.println(airportGraphMatrix);
+		System.out.println("Testing distance-two methods on sample graphs...");
+//		System.out.println(airportGraphMatrix.getDistance2(3));
+		System.out.println("****");
+		System.out.println(airportGraphMatrix.square());
+		
 
 		
 	}

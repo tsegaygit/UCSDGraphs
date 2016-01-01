@@ -303,7 +303,7 @@ public abstract class Graph {
 		System.out.println("Testing distance-two methods on sample graphs...");
 //		System.out.println(airportGraphMatrix.getDistance2(3));
 		System.out.println("****");
-		System.out.println(airportGraphMatrix.square());
+		//System.out.println(airportGraphMatrix.square());
 		
 
 		

@@ -1,0 +1,43 @@
+Class: MapGraph
+
+Modifications made to MapGraph (what and why):
+
+added new private member variable to represent the vertices of the graph
+
+updated class MapGraph constructor to initialize the vertices member variable with an empty graph
+
+Implemented getNumVertices method that returns the number of vertices in the graph
+
+Implemented getVertices method that returns the intersections, which are the vertices in this graph.
+
+Implemented getNumEdges method that returns the number of edges in the graph which is the number of road segments in the graph
+
+Implemented addVertex(GeographicPoint location) method that adds a node corresponding to an intersection at a Geographic Point
+
+Implemented addEdge(GeographicPoint from, GeographicPoint to, String roadName,
+			String roadType, double length) method that adds a directed edge to the graph from point A to point B
+implemented bfs(GeographicPoint start, 
+			 					     GeographicPoint goal, Consumer<GeographicPoint> nodeSearched) method that finds the path from start to goal using breadth first search			
+added new supporting method , dfsSearch(MapNode start, MapNode goal, 
+			HashMap<MapNode, MapNode> parentMap, Consumer<GeographicPoint> nodeSearched),  to perform breadth first search
+		
+added new supporting method, constructPath(MapNode start, MapNode goal,
+			HashMap<MapNode, MapNode> parentMap), that will construct the path from point A to point B
+			
+			
+Class: MapNode
+
+Purpose and description of class: 
+A class to represent a Node in a graph which is an intersection between two edges or streets on a map. The class has two private members, 
+location which is (longitude, latitude) location of the node in the graph and a list of edges.
+
+The class exposes several public methods 
+	
+Class: MapEdge
+
+Purpose and description of class: 
+A class to represent an Edge on a graph which is a line between two adjacent nodes or street that connects two adjacent nodes
+
+This class contains a start and end points, which are nodes in the graph. It also contains several properties to capture edge information like road name, road type and edge length.
+
+This class exposes public accessor methods 

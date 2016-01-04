@@ -44,6 +44,13 @@ public class GeographicPoint extends Double {
     {
     	return "Lat: " + getX() + ", Lon: " + getY();
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		GeographicPoint geo = (GeographicPoint)obj;
+		return this.x==geo.getX() && this.y==geo.getY();
+	}
 	
 	
 }
